@@ -9,6 +9,7 @@
 #include"Host.h"
 #include"helper.h"
 #include"simulation.h"
+#include"DifferentialModel.h"
 
 
 using namespace std;
@@ -16,17 +17,19 @@ using namespace std;
 
 int main(){
 
-    //giving a seed to srand for random number generation using rand()
-    srand(time(NULL));
+    differentialModel();
 
-    vector<Host> hosts;
-    makeHosts(hosts, 1600);
+    // //giving a seed to srand for random number generation using rand()
+    // srand(time(NULL));
 
-    //to run the simulation
-    runSim2(hosts);
+    // vector<Host> hosts;
+    // makeHosts(hosts, 1600);
 
-    //printing the infections for the given period (day wise)
-    printInfectedVector();
+    // //to run the simulation
+    // runSim2(hosts);
+
+    // //printing the infections for the given period (day wise)
+    // printInfectedVector();
 
     return 0;
 }
