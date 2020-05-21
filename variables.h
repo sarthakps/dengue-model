@@ -8,3 +8,9 @@ int totalHosts = 1600;
 
 //average infection rate
 float infectionRate = 0.0028125;
+
+//time step for differential simulation (taken as 1 day here)
+double dt;
+
+//length of dengue season
+double lengthOfSeason;
