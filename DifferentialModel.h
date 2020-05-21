@@ -1,30 +1,64 @@
 using namespace std;
 
-double* differentialModel() {
-    int Sv0 = 10; // Suspected Vector
-    int Sh0 = 10; // Suspected Host
-    int Iv0 = 10; // Infected Vector
-    int Ih0 = 10; // Infected Host
-    int Dv0 = 10; // Death rate Vector
-    int Dh0 = 10; // Death rate Host
-    int Bv0 = 10; // Transmission Rate vector
-    int Bh0 = 10; // Transmission Rate Host
+vector<double> differentialModel() {
+    double Sv0 = 10; // Suspected Vector
+    double Sh0 = 10; // Suspected Host
+    double Iv0 = 10; // Infected Vector
+    double Ih0 = 10; // Infected Host
+    double Dv0 = 10; // Death rate Vector
+    double Dh0 = 10; // Death rate Host
+    double Bv0 = 10; // Transmission Rate vector
+    double Bh0 = 10; // Transmission Rate Host
+    double R0 = 10; // No. of Recovered Patients
+    double r = 10; // Recovery Rate of Patients
 
-    // dIv/dt = BvSvIh - dvIv
+    // dSh/dt = -BhShIv;
+    // dIh/dt = BhShIv - rIh;
+    // dR/dt = +rIh;
+    // dIv/dt = BvSvIh - dvIv;
+
     double dt = 0.01;
     double n = 1 / dt + 1;
     
-    double Iv[(int)n];
+    vector<double> Sh;
+    vector<double> Ih;
+    vector<double> R;
+    vector<double> Iv;
 
-    Iv[0] = Iv0;
+    Sh.push_back(Sh0);
+    Ih.push_back(Ih0);
+    R.push_back(R0);
+    Iv.push_back(Iv0);
 
-    int prev = 1;
-    int next;
-    for(int i = 1; i < n; i++) {
-        // dIv/dt = BvSvIh - dvIv
-        next = prev + Bv0*Sv0*Ih0 - Dv0*Iv(i - 1);
-        Iv[i] = next;
-        prev = next;
+    for(int i = 1; i <= (int)n; i++) {
+        double prev_Sh = Sh.back();
+        double prev_Ih = Ih.back();
+        double prev_R = R.back();
+        double prev_Iv = Iv.back();
+
+        // dSh/dt = -BhShIv;
+        // (next_Sh - prev_Sh) / dt = - Bh0 * prev_Sh * prev_Iv;
+        // next_Sh = prev_Sh - Bh0 * prev_Sh * prev_Iv * dt;
+        double next_Sh = prev_Sh - Bh0 * prev_Sh * prev_Iv * dt;
+        Sh.push_back(next_Sh);
+
+        // dIh/dt = BhShIv - rIh;
+        // (next_Ih - prev_Ih) / dt = Bh0 * prev_Sh * prev_Iv * dt - r * prev_Ih;
+        // next_Ih = prev_Ih + (Bh0 * prev_Sh * prev_Iv * dt - r * prev_Ih) * dt;
+        double next_Ih = prev_Ih + (Bh0 * prev_Sh * prev_Iv * dt - r * prev_Ih) * dt;
+        Ih.push_back(next_Ih);
+
+        // dR/dt = +rIh;
+        // (next_R - prev_R) / dt = r * prev_Ih;
+        // next_R = prev_R + r * prev_Ih * dt;
+        double next_R = prev_R + r * prev_Ih * dt;
+        R.push_back(next_R);
+
+        // dIv/dt = BvSvIh - DvIv;
+        // (next_Iv - prev_Iv) / dt = Bv0 * Sv0 * prev_Ih - Dv0 * prev_Iv;
+        // next_Iv = prev_IV + (Bv0 * Sv0 * prev_Ih - Dv0 * prev_Iv) * dt;
+        double next_Iv = prev_IV + (Bv0 * Sv0 * prev_Ih - Dv0 * prev_Iv) * dt;
+        Iv.push_back(next_Iv);
     }
     
     return Iv;
