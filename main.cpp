@@ -3,6 +3,7 @@
 #include<vector>
 #include<cmath>
 #include<ctime>
+#include<fstream>
 
 #include"MACROS.h"
 #include"variables.h"
