@@ -1,6 +1,6 @@
 using namespace std;
 void differentialModel() {    
-    double A = 7;              // Constant Recruitment Rate of Vector Population
+    double A = 7;               // Constant Recruitment Rate of Vector Population
     double totalCases = 0;      // Intially Total Number of Cases to be 0
 
     // Initial Values
@@ -26,8 +26,8 @@ void differentialModel() {
     // dIh/dt = BhShIv - rIh;
     // dR/dt = +rIh;
 
-    dt = 1;
-    lengthOfSeason = 80;
+    int dt = 1;
+    int lengthOfSeason = 80;
     
     vector<double> Sv;
     vector<double> Sh;
