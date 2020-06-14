@@ -1,1 +1,1 @@
-#define PERIOD 45
+#define PERIOD 80
