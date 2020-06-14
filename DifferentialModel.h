@@ -2,13 +2,13 @@ using namespace std;
 
 void differentialModel() {
     
-    double A = 13;          //constant recruitment rate of vector population
+    double A = 7;          //constant recruitment rate of vector population
     double totalCases = 0;
 
     //initial values
-    double Sv0 = 8;        // Initial No. of Susceptible Vector
+    double Sv0 = 9;        // Initial No. of Susceptible Vector
     double Sh0 = 1600;      // Initial No. of Susceptible Host
-    double Iv0 = 1;         // Initial No. of Infected Vector
+    double Iv0 = 4;         // Initial No. of Infected Vector
     double Ih0 = 0;         // Initial No. of Infected Host
     double R0 = 0;          // Initial No. of Recovered Patients
 
